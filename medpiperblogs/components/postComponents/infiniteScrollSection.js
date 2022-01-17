@@ -38,7 +38,7 @@ export default function InfiniteScrollSection({ InitialPosts = [] }) {
     const { completePostsData, totalPostData } = await getPostsByPage(
       nextPage,
       10,
-      20
+      10
     );
     setPages((prevPage) => {
       return prevPage + 1;

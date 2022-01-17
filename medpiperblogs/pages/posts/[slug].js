@@ -73,8 +73,9 @@ export async function getStaticProps({ params, preview = false }) {
         post,
         morePosts: morePosts,
       },
+      revalidate: 60,
     };
   } catch (e) {
-    console.log(e);
+    return { props: { preview: preview, post: [], morePosts: [] } };
   }
 }

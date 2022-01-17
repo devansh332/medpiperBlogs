@@ -105,7 +105,7 @@ async function getContentImagePost(featured_media) {
     const postContentImage = postContentImageData?.guid?.rendered;
     return postContentImage;
   } catch (e) {
-    console.log(e);
+    
     return "";
   }
 }
@@ -118,7 +118,7 @@ async function getContentPostAuthor(userId) {
 
     return postUserData;
   } catch (e) {
-    console.log(e);
+    
     return [];
   }
 }
@@ -168,7 +168,7 @@ export async function getPostsByPage(page = 1, offset = 0, limit = 10) {
     const filterCompletePostsData = getEssentialPostsInfo(completePostsData);
     return { completePostsData: filterCompletePostsData, totalPostData } || {};
   } catch (err) {
-    console.log(err);
+    
     return {};
   }
 }
@@ -188,7 +188,7 @@ export async function getPostAndMorePosts(slug) {
 
     return { post: filteredPost, morePosts: filterCompletePostsData };
   } catch (e) {
-    console.log(e);
+    
     return [];
   }
 }

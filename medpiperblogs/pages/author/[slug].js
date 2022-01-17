@@ -20,7 +20,6 @@ import Head from "next/head";
 import Tags from "../../components/postComponents/tags";
 import Author from "../../components/authorComponents/author";
 
-
 export default function Post({ userData, preview }) {
   const router = useRouter();
 
@@ -74,6 +73,6 @@ export async function getStaticProps({ params, preview = false }) {
       },
     };
   } catch (e) {
-    console.log(e);
+    return { props: { preview: preview, userData: [] } };
   }
 }
