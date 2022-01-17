@@ -1,9 +1,9 @@
-import Avatar from "../components/avatar";
-import Date from "../components/date";
-import CoverImage from "../components/cover-image";
-import PostTitle from "../components/post-title";
-import Categories from "../components/categories";
-import WhatsappShare from "./whatsappShare";
+import Avatar from "../authorComponents/avatar";
+import Date from "../generalComponents/date";
+import CoverImage from "./cover-image";
+import PostTitle from "../postComponents/post-title";
+import Categories from "../generalComponents/categories";
+import WhatsappShare from "../generalComponents/whatsappShare";
 
 export default function PostHeader({
   title,

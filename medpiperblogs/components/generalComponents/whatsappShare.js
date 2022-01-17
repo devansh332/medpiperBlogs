@@ -1,7 +1,7 @@
 import React from "react";
 // import next link
 import Link from "next/link";
-import WhatsAppIcon from "./whatsAppIcons";
+import WhatsAppIcon from "../iconComponents/whatsAppIcons";
 
 function WhatsappShare() {
   // share current url on whatsapp

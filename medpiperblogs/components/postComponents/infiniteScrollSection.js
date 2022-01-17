@@ -54,7 +54,7 @@ export default function InfiniteScrollSection({ InitialPosts = [] }) {
       getMorePost();
     }
   };
-  console.log(totalPages, newPageRef.current);
+
   return (
     <>
       {posts.map((post) => {
