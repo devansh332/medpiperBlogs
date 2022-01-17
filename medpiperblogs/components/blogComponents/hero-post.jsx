@@ -4,6 +4,7 @@ import CoverImage from "./cover-image";
 import Link from "next/link";
 
 const HeroPost = ({ title, coverImage, date, excerpt, author, slug }) => {
+  console.log(author, "author");
   return (
     <section>
       <div className="mb-8 md:mb-16">

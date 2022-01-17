@@ -23,13 +23,14 @@ export const getCompletePostInfo = (post) => {
 
 export const getEssentialPostInfo = (post) => {
   const { title, excerpt, slug, date, postContentImage, userData } = post;
+  const userDataFilter = getFilteredUserData(userData);
   return {
     title: title.rendered,
     excerpt: excerpt.rendered,
     slug,
     date,
     postContentImage,
-    userData,
+    userData: userDataFilter,
   };
 };
 

@@ -6,8 +6,9 @@ import Layout from "../../components/generalComponents/layout";
 import { getAllUserDataSlugs, getAuthorDataWithSlug } from "../../lib/api";
 import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
-import Author from "../../components/authorComponents/author";
+
 import SectionSeparator from "../../components/generalComponents/section-separator";
+import Avatar from "../../components/authorComponents/avatar";
 
 const AuthorPage = ({ userData, preview }) => {
   const router = useRouter();
@@ -29,7 +30,12 @@ const AuthorPage = ({ userData, preview }) => {
                 <title>{userData?.name} | Author</title>
                 <meta property="og:image" content={userData?.avatar_urls} />
               </Head>
-              <Author author={userData} />
+              <Avatar
+                author={userData}
+                imgHeight={24}
+                imgWidth={24}
+                isAuthorNameClickable={false}
+              />
             </article>
 
             <SectionSeparator />
