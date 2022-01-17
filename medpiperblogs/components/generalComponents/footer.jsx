@@ -1,6 +1,6 @@
 import Container from "./container";
 // import Example path from lib/constants.js:
-import { EXAMPLE_PATH } from "../../lib/constants";
+import { githubRepoUrl } from "../../lib/constants";
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
           </h3>
           <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
             <a
-              href={`https://github.com/vercel/next.js/tree/canary/examples/${EXAMPLE_PATH}`}
+              href={`${githubRepoUrl}`}
               className="mx-3 font-bold hover:underline"
             >
               View on GitHub

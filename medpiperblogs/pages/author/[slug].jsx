@@ -3,19 +3,26 @@ import ErrorPage from "next/error";
 import Container from "../../components/generalComponents/container";
 import Header from "../../components/generalComponents/header";
 import Layout from "../../components/generalComponents/layout";
-import { getAllUserDataSlugs, getAuthorDataWithSlug } from "../../lib/api";
+import {
+  getAllUserDataSlugs,
+  getAuthorDataWithSlug,
+  getAuthorDataWithSlugAndMorePosts,
+} from "../../lib/api";
 import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
 
 import SectionSeparator from "../../components/generalComponents/section-separator";
 import Avatar from "../../components/authorComponents/avatar";
+import MoreStories from "../../components/blogComponents/more-stories";
+import { MORE_STORY_TITLE_BY_AUTHOR } from "../../lib/constants";
 
-const AuthorPage = ({ userData, preview }) => {
+const AuthorPage = ({ userData, morePosts, preview }) => {
   const router = useRouter();
-
+  
   if (!router.isFallback && !userData?.slug) {
     return <ErrorPage statusCode={404} />;
   }
+  const infiniteScrollFilter = { author: userData.id };
 
   return (
     <Layout preview={preview}>
@@ -23,7 +30,7 @@ const AuthorPage = ({ userData, preview }) => {
         <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
-        ) : userData.slug ? (
+        ) : userData?.slug ? (
           <>
             <article>
               <Head>
@@ -34,11 +41,12 @@ const AuthorPage = ({ userData, preview }) => {
                 author={userData}
                 imgHeight={24}
                 imgWidth={24}
-                isAuthorNameClickable={false}
+                isNameClickable={false}
               />
             </article>
 
             <SectionSeparator />
+            {morePosts.length > 0 && <MoreStories posts={morePosts} moreStoryTitle={MORE_STORY_TITLE_BY_AUTHOR} filter ={infiniteScrollFilter}/>}
           </>
         ) : null}
       </Container>
@@ -62,11 +70,14 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params, preview = false }) => {
   try {
-    const userData = await getAuthorDataWithSlug(params.slug);
+    const { userData, morePosts } = await getAuthorDataWithSlugAndMorePosts(
+      params.slug
+    );
     return {
       props: {
         preview: preview,
         userData,
+        morePosts,
       },
     };
   } catch (e) {

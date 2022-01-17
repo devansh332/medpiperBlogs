@@ -2,14 +2,15 @@ import Avatar from "../authorComponents/avatar";
 import Date from "../generalComponents/date";
 import CoverImage from "./cover-image";
 import PostTitle from "./post-title";
-import Categories from "../generalComponents/categories";
+
 import WhatsappShare from "../generalComponents/whatsappShare";
 
 const PostHeader = ({ title, coverImage, date, author, categories }) => {
   return (
     <>
-      <PostTitle>{title}</PostTitle>
-      <div className="flex flex-row justify-between">
+      {title ? <PostTitle>{title}</PostTitle> : ""}
+
+      <div className="flex flex-row justify-between align-middle px-3 mb-2">
         <Avatar author={author} />
         <WhatsappShare />
       </div>
@@ -20,7 +21,6 @@ const PostHeader = ({ title, coverImage, date, author, categories }) => {
       <div className="flex flex-row-reverse max-w-2xl mx-auto">
         <div className="text-right mb-6 text-lg">
           Posted <Date dateString={date} />
-          {/* <Categories categories={categories} /> */}
         </div>
       </div>
     </>

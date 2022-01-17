@@ -51,7 +51,7 @@ export async function getAllPostsWithSlug(limit = 10) {
   return allSlugs;
 }
 
-export async function getAuthorDataWithSlug(slug, limit = 10) {
+export async function getAuthorDataWithSlugAndMorePosts(slug, limit = 10) {
   const userDataFilter = getUserDataFields();
   const query = {
     slug: slug,
@@ -62,7 +62,15 @@ export async function getAuthorDataWithSlug(slug, limit = 10) {
   const userData =
     (userDataResponse.length > 0 && getFilteredUserData(userDataResponse[0])) ||
     [];
-  return userData;
+  const morePosts = await getAllPosts(10, { author: userData.id });
+  const filteredMorePosts = getEssentialPostsInfo(morePosts);
+
+  return (
+    { userData, morePosts: filteredMorePosts } || {
+      userData: {},
+      morePosts: [],
+    }
+  );
 }
 export async function getPostBySlug(slug) {
   const query = {
@@ -121,10 +129,15 @@ async function getContentPostAuthor(userId) {
   }
 }
 
-export async function getAllPosts(limit = 10, fields = getPostTileFields()) {
+export async function getAllPosts(
+  limit = 10,
+  filters = {},
+  fields = getPostTileFields()
+) {
   const query = {
     per_page: limit,
     _fields: fields,
+    ...filters,
   };
   const homeApiData = await getPostData(query);
   const homePagePosts = await Promise.all(
@@ -146,28 +159,38 @@ export async function getFilteredAllPosts(limit = 10) {
   return filterHomePagePosts || [];
 }
 
-export async function getPostsByPage(page = 1, offset = 0, limit = 10) {
+export async function getPostsByPage(
+  page = 1,
+  offset = 0,
+  limit = 10,
+  filters = {}
+) {
   try {
     const query = {
       per_page: limit,
       page: page,
       _fields: getPostTileFields(),
+      ...filters,
     };
     const { apiData, totalPostData } = await getPostData(query, true);
     const completePostsData = await Promise.all(
       apiData.map(async (post) => {
         const postContentImage = await getContentImagePost(post.featured_media);
-
-        const userDataResponse = await getContentPostAuthor(post.author);
-        const userData = getFilteredUserData(userDataResponse);
+        const userData = await getContentPostAuthor(post.author);
 
         return { ...post, postContentImage, userData };
       })
     );
+    console.log(totalPostData, "filterCompletePostsData");
     const filterCompletePostsData = getEssentialPostsInfo(completePostsData);
-    return { completePostsData: filterCompletePostsData, totalPostData } || {};
+    return (
+      { completePostsData: filterCompletePostsData, totalPostData } || {
+        completePostsData: [],
+        totalPostData: {},
+      }
+    );
   } catch (err) {
-    return {};
+    return { completePostsData: [], totalPostData: {} };
   }
 }
 
@@ -177,7 +200,9 @@ export async function getPostAndMorePosts(slug) {
 
     post.postContentImage = await getContentImagePost(post.featured_media);
 
-    post.userData = await getContentPostAuthor(post.author);
+    const userDataResponse = await getContentPostAuthor(post.author);
+
+    post.userData = getFilteredUserData(userDataResponse);
 
     const morePosts = await getAllPosts(2);
     const filterCompletePostsData = getEssentialPostsInfo(morePosts);

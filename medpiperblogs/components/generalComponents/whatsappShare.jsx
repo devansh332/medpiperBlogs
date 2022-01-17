@@ -16,10 +16,10 @@ const WhatsappShare = () => {
   const shareUrl = `whatsapp://send?text=${getShareUrl()}`;
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <span className="hidden md:block">Share</span>
 
-      <div className=" mx-2 w-16 h-9 flex align-middle justify-center">
+      <div className=" mx-2  flex align-middle justify-center">
         <Link href={`${shareUrl}`}>
           <a className="text-gray-600 hover:text-gray-800">
             <WhatsAppIcon />

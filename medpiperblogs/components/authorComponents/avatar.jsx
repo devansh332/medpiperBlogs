@@ -6,33 +6,30 @@ const Avatar = ({
   author,
   imgWidth = 12,
   imgHeight = 12,
-  isAuthorNameClickable = true,
+  isNameClickable = true,
 }) => {
-  const name = author ? author?.name : null;
-
+  const name = author?.name ? author.name : "";
   return (
     <div className="flex items-center">
       {author?.avatar_urls && (
         <div className={`w-${imgWidth} h-${imgHeight} relative mr-4`}>
           <Image
-            src={author.avatar_urls}
+            src={author?.avatar_urls}
             layout="fill"
             className="rounded-full"
             alt={name}
           />
         </div>
       )}
-      {isAuthorNameClickable && author?.slug ? (
-        <div className="text-xl font-bold">
+      <div className="text-xl font-bold">
+        {author?.slug && isNameClickable ? (
           <Link href={`/author/${author.slug}`}>
             <a className="hover:underline">{name}</a>
           </Link>
-        </div>
-      ) : (
-        <>
-          {name && <div className="text-xl capitalize font-bold">{name}</div>}
-        </>
-      )}
+        ) : (
+          <>{name}</>
+        )}
+      </div>
     </div>
   );
 };

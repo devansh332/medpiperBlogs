@@ -25,7 +25,7 @@ const Post = ({ post, morePosts, preview }) => {
         <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
-        ) : post.slug ? (
+        ) : post?.slug ? (
           <>
             <article>
               <Head>

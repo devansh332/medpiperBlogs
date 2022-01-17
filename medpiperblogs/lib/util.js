@@ -51,8 +51,9 @@ export const getCompletePostTileFields = () => {
 };
 
 export const getFilteredUserData = (userData) => {
-  const { name, slug, avatar_urls } = userData;
+  const { id, name, slug, avatar_urls } = userData;
   return {
+    id,
     name,
     slug,
     avatar_urls: avatar_urls["24"],

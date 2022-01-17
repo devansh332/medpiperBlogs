@@ -3,16 +3,7 @@ import { getFilteredAllPosts, getPostsByPage } from "../../lib/api";
 import PostPreview from "./post-preview";
 import PostSkeleton from "./postSkeleton";
 
-const InfiniteScrollSection = ({ InitialPosts = [] }) => {
-  // InfiniteScrollSection accept InitialPosts as props
-  // InitialPosts is an array of posts
-  // InfiniteScrollSection will render posts in InitialPosts
-  // InfiniteScrollSection have a state to store posts
-  // InfiniteScrollSection have a ref to store the last post
-  // InfiniteScrollSection have a state to store the loading state
-  // IntersectionObserver will observe the ref and will call the callback when the ref is in viewport
-  // IntersectionObserver will call the callback when the ref is in viewport
-
+const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
   const [posts, setPosts] = useState(InitialPosts);
   const [loading, setLoading] = useState(false);
 
@@ -32,46 +23,61 @@ const InfiniteScrollSection = ({ InitialPosts = [] }) => {
 
   const getMorePost = async () => {
     const nextPage = newPageRef.current + 1;
-    newPageRef.current = nextPage;
 
     setLoading(true);
     const { completePostsData, totalPostData } = await getPostsByPage(
       nextPage,
       10,
-      10
+      10,
+      filter
     );
-    setTotalPages(() => totalPostData.totalPages);
-    setPosts((posts) => [...posts, ...completePostsData]);
 
+    if (completePostsData || totalPostData) {
+      if (completePostsData && completePostsData.length > 0) {
+        setPosts((posts) => [...posts, ...completePostsData]);
+      }
+      if (
+        totalPages == Infinity &&
+        totalPostData &&
+        totalPostData?.totalPages
+      ) {
+        setTotalPages(() => totalPostData.totalPages);
+      }
+      if (totalPages == Infinity && !totalPostData?.totalPages) {
+        setTotalPages(() => 0);
+      }
+    }
+    newPageRef.current = nextPage;
     setLoading(false);
   };
   const handleObserver = (entities) => {
     const target = entities[0];
-    if (target.isIntersecting) {
+    if (target?.isIntersecting) {
       getMorePost();
     }
   };
-
+  console.log("totalPages", totalPages, newPageRef.current);
   return (
     <>
-      {posts.map((post) => {
-        return (
-          <PostPreview
-            key={post.slug}
-            title={post?.title}
-            coverImage={post.postContentImage}
-            date={post.date}
-            author={post.userData}
-            slug={post.slug}
-            excerpt={post?.excerpt}
-          />
-        );
-      })}
+      {posts &&
+        posts.map((post, index) => {
+          return (
+            <PostPreview
+              key={index}
+              title={post?.title}
+              coverImage={post.postContentImage}
+              date={post.date}
+              author={post.userData}
+              slug={post.slug}
+              excerpt={post?.excerpt}
+            />
+          );
+        })}
 
-      {totalPages > newPageRef.current && (
+      {newPageRef.current && totalPages > newPageRef.current && (
         <div ref={lastPostRef}>
           {loading && (
-            <div className="  h-100 p-4 mr-5 mb-5">
+            <div className="h-100 p-4 mr-5 mb-5">
               <PostSkeleton />
             </div>
           )}
