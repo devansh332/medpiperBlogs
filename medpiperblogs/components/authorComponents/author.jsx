@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Author({ author }) {
+const Author = ({ author }) => {
   const name = author ? author.name : null;
 
   return (
@@ -16,4 +16,6 @@ export default function Author({ author }) {
       <div className="text-xl font-bold">{name}</div>
     </div>
   );
-}
+};
+
+export default Author;

@@ -1,4 +1,4 @@
-export default function Tags({ tags }) {
+const Tags = ({ tags }) => {
   return (
     <div className="max-w-2xl mx-auto">
       <p className="mt-8 text-lg font-bold">
@@ -11,4 +11,6 @@ export default function Tags({ tags }) {
       </p>
     </div>
   );
-}
+};
+
+export default Tags;

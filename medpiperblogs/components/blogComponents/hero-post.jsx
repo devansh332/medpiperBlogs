@@ -1,16 +1,9 @@
-import Avatar from "../../components/authorComponents/avatar";
-import Date from "../../components/generalComponents/date";
-import CoverImage from "../../components/postComponents/cover-image";
+import Avatar from "../authorComponents/avatar";
+import Date from "../generalComponents/date";
+import CoverImage from "./cover-image";
 import Link from "next/link";
 
-export default function HeroPost({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug,
-}) {
+const HeroPost = ({ title, coverImage, date, excerpt, author, slug }) => {
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -47,4 +40,6 @@ export default function HeroPost({
       </div>
     </section>
   );
-}
+};
+
+export default HeroPost;

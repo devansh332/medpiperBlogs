@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import WhatsAppIcon from "../iconComponents/whatsAppIcons";
 
-function WhatsappShare() {
+const WhatsappShare = () => {
   // share current url on whatsapp
   const getShareUrl = () => {
     if (typeof window !== "undefined") {
@@ -28,6 +28,6 @@ function WhatsappShare() {
       </div>
     </div>
   );
-}
+};
 
 export default WhatsappShare;

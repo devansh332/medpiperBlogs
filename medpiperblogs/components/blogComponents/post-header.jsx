@@ -1,17 +1,11 @@
 import Avatar from "../authorComponents/avatar";
 import Date from "../generalComponents/date";
 import CoverImage from "./cover-image";
-import PostTitle from "../postComponents/post-title";
+import PostTitle from "./post-title";
 import Categories from "../generalComponents/categories";
 import WhatsappShare from "../generalComponents/whatsappShare";
 
-export default function PostHeader({
-  title,
-  coverImage,
-  date,
-  author,
-  categories,
-}) {
+const PostHeader = ({ title, coverImage, date, author, categories }) => {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -31,4 +25,6 @@ export default function PostHeader({
       </div>
     </>
   );
-}
+};
+
+export default PostHeader;

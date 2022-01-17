@@ -1,7 +1,7 @@
 import React from "react";
 import ContentLoader, { List } from "react-content-loader";
 
-function PostSkeleton() {
+const PostSkeleton = () => {
   return (
     <ContentLoader viewBox="0 0 100 100">
       {/* Only SVG shapes */}
@@ -15,6 +15,6 @@ function PostSkeleton() {
       <circle cx="5" cy="95" r="5" />
     </ContentLoader>
   );
-}
+};
 
 export default PostSkeleton;

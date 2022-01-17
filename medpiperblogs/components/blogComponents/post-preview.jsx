@@ -3,14 +3,7 @@ import Avatar from "../authorComponents/avatar";
 import Date from "../generalComponents/date";
 import CoverImage from "./cover-image";
 
-export default function PostPreview({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug,
-}) {
+const PostPreview = ({ title, coverImage, date, excerpt, author, slug }) => {
   return (
     <div className=" border-2 p-4 mr-5 mb-5">
       <div className="mb-5">
@@ -36,4 +29,6 @@ export default function PostPreview({
       <Avatar author={author} />
     </div>
   );
-}
+};
+
+export default PostPreview;

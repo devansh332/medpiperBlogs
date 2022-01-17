@@ -2,7 +2,7 @@ import Image from "next/image";
 // import next link
 import Link from "next/link";
 
-export default function Avatar({ author }) {
+const Avatar = ({ author }) => {
   const name = author
     ? author.firstName && author.lastName
       ? `${author.firstName} ${author.lastName}`
@@ -26,4 +26,5 @@ export default function Avatar({ author }) {
       </div>
     </div>
   );
-}
+};
+export default Avatar;

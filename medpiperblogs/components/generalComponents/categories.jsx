@@ -1,4 +1,4 @@
-export default function Categories({ categories }) {
+const Categories = ({ categories }) => {
   return (
     <span className="ml-1">
       under
@@ -12,5 +12,6 @@ export default function Categories({ categories }) {
         <span className="ml-1">{categories.edges.node.name}</span>
       )}
     </span>
-  )
-}
+  );
+};
+export default Categories;

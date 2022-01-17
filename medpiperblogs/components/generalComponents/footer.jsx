@@ -2,7 +2,7 @@ import Container from "./container";
 // import Example path from lib/constants.js:
 import { EXAMPLE_PATH } from "../../lib/constants";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="bg-accent-1 border-t border-accent-2">
       <Container>
@@ -22,4 +22,5 @@ export default function Footer() {
       </Container>
     </footer>
   );
-}
+};
+export default Footer;

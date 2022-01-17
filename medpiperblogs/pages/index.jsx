@@ -2,11 +2,11 @@ import Head from "next/head";
 import Container from "../components/generalComponents/container";
 import Intro from "../components/generalComponents/intro";
 import Layout from "../components/generalComponents/layout";
-import HeroPost from "../components/postComponents/hero-post";
-import MoreStories from "../components/postComponents/more-stories";
+import HeroPost from "../components/blogComponents/hero-post";
+import MoreStories from "../components/blogComponents/more-stories";
 import { getFilteredAllPosts } from "../lib/api";
 
-export default function Index({ allPosts, preview }) {
+const Index = ({ allPosts, preview }) => {
   const heroPost = allPosts[0];
   const morePosts = allPosts.slice(1);
 
@@ -33,12 +33,14 @@ export default function Index({ allPosts, preview }) {
       </Layout>
     </>
   );
-}
+};
 
-export async function getStaticProps({ preview }) {
+export default Index;
+
+export const getStaticProps = async ({ preview }) => {
   const allPosts = await getFilteredAllPosts();
 
   return {
     props: { allPosts },
   };
-}
+};

@@ -1,8 +1,8 @@
-import Footer from "./footer.js";
-import Meta from "./meta.js";
-import Search from "./search.js";
+import Footer from "./footer";
+import Meta from "./meta";
+import Search from "./search";
 
-export default function Layout({ preview, children }) {
+const Layout = ({ preview, children }) => {
   return (
     <>
       <Meta />
@@ -16,4 +16,5 @@ export default function Layout({ preview, children }) {
       <Footer />
     </>
   );
-}
+};
+export default Layout;

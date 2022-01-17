@@ -3,7 +3,7 @@ import { getFilteredAllPosts, getPostsByPage } from "../../lib/api";
 import PostPreview from "./post-preview";
 import PostSkeleton from "./postSkeleton";
 
-export default function InfiniteScrollSection({ InitialPosts = [] }) {
+const InfiniteScrollSection = ({ InitialPosts = [] }) => {
   // InfiniteScrollSection accept InitialPosts as props
   // InitialPosts is an array of posts
   // InfiniteScrollSection will render posts in InitialPosts
@@ -15,7 +15,7 @@ export default function InfiniteScrollSection({ InitialPosts = [] }) {
 
   const [posts, setPosts] = useState(InitialPosts);
   const [loading, setLoading] = useState(false);
-  const [pages, setPages] = useState(2);
+
   const newPageRef = useRef(1);
   const lastPostRef = useRef(null);
   const [totalPages, setTotalPages] = useState(Infinity);
@@ -40,9 +40,6 @@ export default function InfiniteScrollSection({ InitialPosts = [] }) {
       10,
       10
     );
-    setPages((prevPage) => {
-      return prevPage + 1;
-    });
     setTotalPages(() => totalPostData.totalPages);
     setPosts((posts) => [...posts, ...completePostsData]);
 
@@ -82,4 +79,6 @@ export default function InfiniteScrollSection({ InitialPosts = [] }) {
       )}
     </>
   );
-}
+};
+
+export default InfiniteScrollSection;

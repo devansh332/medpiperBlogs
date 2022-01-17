@@ -1,7 +1,7 @@
 import PostPreview from "./post-preview";
 import InfiniteScrollSection from "./infiniteScrollSection";
 
-export default function MoreStories({ posts }) {
+const MoreStories = ({ posts }) => {
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">
@@ -12,4 +12,5 @@ export default function MoreStories({ posts }) {
       </div>
     </section>
   );
-}
+};
+export default MoreStories;

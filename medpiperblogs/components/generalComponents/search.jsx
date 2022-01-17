@@ -3,17 +3,16 @@ import Link from "next/link";
 import SearchBarIcon from "../iconComponents/searchBarIcon";
 // import styles from "./search.module.css";
 
-export default function Search() {
+const Search = () => {
   const searchRef = useRef(null);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(false);
   const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   const searchEndpoint = (query) =>
     `https://journomed.com/wp-json/wp/v2/posts?search=${query}&_fields=slug,title`;
 
-  const onChange = (event) => {
+  const onChangeHandler = (event) => {
     const query = event.target.value;
     setQuery(query);
     if (query.length) {
@@ -26,20 +25,21 @@ export default function Search() {
       setResults([]);
     }
   };
-  const callSomething = useCallback(() => {
+  const onTitleHandler = useCallback(() => {
     setQuery("");
     setActive(false);
     setResults([]);
   }, []);
-  const onFocus = useCallback(() => {
+
+  const onFocusHandler = useCallback(() => {
     setActive(true);
-    window.addEventListener("click", onClick);
+    window.addEventListener("click", outSideClickHandler);
   }, []);
 
-  const onClick = useCallback((event) => {
+  const outSideClickHandler = useCallback((event) => {
     if (searchRef.current && !searchRef.current.contains(event.target)) {
       setActive(false);
-      window.removeEventListener("click", onClick);
+      window.removeEventListener("click", outSideClickHandler);
     }
   }, []);
   return (
@@ -49,8 +49,8 @@ export default function Search() {
     >
       <input
         className="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-        onChange={onChange}
-        onFocus={onFocus}
+        onChange={onChangeHandler}
+        onFocus={onFocusHandler}
         placeholder="Search posts"
         type="text"
         value={query}
@@ -64,7 +64,7 @@ export default function Search() {
                 key={slug}
               >
                 <Link href="/posts/[slug]" as={`/posts/${slug}`}>
-                  <a onClick={callSomething}>{title.rendered}</a>
+                  <a onClick={onTitleHandler}>{title.rendered}</a>
                 </Link>
               </li>
             ))}
@@ -73,4 +73,6 @@ export default function Search() {
       )}
     </div>
   );
-}
+};
+
+export default Search;

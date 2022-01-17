@@ -1,26 +1,15 @@
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Container from "../../components/generalComponents/container";
-import PostBody from "../../components/postComponents/post-body";
-import MoreStories from "../../components/postComponents/more-stories";
 import Header from "../../components/generalComponents/header";
-import PostHeader from "../../components/postComponents/post-header";
-import SectionSeparator from "../../components/generalComponents/section-separator";
 import Layout from "../../components/generalComponents/layout";
-import {
-  getAllPostsWithSlug,
-  getAllUserData,
-  getAllUserDataSlugs,
-  getAuthorDataWithSlug,
-  getPostAndMorePosts,
-  getUsersData,
-} from "../../lib/api";
-import PostTitle from "../../components/postComponents/post-title";
+import { getAllUserDataSlugs, getAuthorDataWithSlug } from "../../lib/api";
+import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
-import Tags from "../../components/postComponents/tags";
 import Author from "../../components/authorComponents/author";
+import SectionSeparator from "../../components/generalComponents/section-separator";
 
-export default function Post({ userData, preview }) {
+const AuthorPage = ({ userData, preview }) => {
   const router = useRouter();
 
   if (!router.isFallback && !userData?.slug) {
@@ -49,9 +38,11 @@ export default function Post({ userData, preview }) {
       </Container>
     </Layout>
   );
-}
+};
 
-export async function getStaticPaths() {
+export default AuthorPage;
+
+export const getStaticPaths = async () => {
   const allSlugs = await getAllUserDataSlugs(100);
 
   const path = allSlugs.map((slug) => {
@@ -61,9 +52,9 @@ export async function getStaticPaths() {
     paths: path,
     fallback: true,
   };
-}
+};
 
-export async function getStaticProps({ params, preview = false }) {
+export const getStaticProps = async ({ params, preview = false }) => {
   try {
     const userData = await getAuthorDataWithSlug(params.slug);
     return {
@@ -75,4 +66,4 @@ export async function getStaticProps({ params, preview = false }) {
   } catch (e) {
     return { props: { preview: preview, userData: [] } };
   }
-}
+};
