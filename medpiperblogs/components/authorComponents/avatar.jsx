@@ -12,13 +12,14 @@ const Avatar = ({
   return (
     <div className="flex items-center">
       {author?.avatar_urls && (
-        <div className={`w-${imgWidth} h-${imgHeight} relative mr-4`}>
+        <div className={`w-${imgWidth} h-${imgHeight} w-8 h-8 relative mr-4`}>
           <Image
             src={author?.avatar_urls}
             layout="fill"
             className="rounded-full"
             alt={name}
           />
+          ...
         </div>
       )}
       <div className="text-xl font-bold">

@@ -18,11 +18,11 @@ import { MORE_STORY_TITLE_BY_AUTHOR } from "../../lib/constants";
 
 const AuthorPage = ({ userData, morePosts, preview }) => {
   const router = useRouter();
-  
+
   if (!router.isFallback && !userData?.slug) {
     return <ErrorPage statusCode={404} />;
   }
-  const infiniteScrollFilter = { author: userData.id };
+  const infiniteScrollFilter = userData?.id ? { author: userData.id } : {};
 
   return (
     <Layout preview={preview}>
@@ -46,7 +46,13 @@ const AuthorPage = ({ userData, morePosts, preview }) => {
             </article>
 
             <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} moreStoryTitle={MORE_STORY_TITLE_BY_AUTHOR} filter ={infiniteScrollFilter}/>}
+            {morePosts.length > 0 && (
+              <MoreStories
+                posts={morePosts}
+                moreStoryTitle={MORE_STORY_TITLE_BY_AUTHOR}
+                filter={infiniteScrollFilter}
+              />
+            )}
           </>
         ) : null}
       </Container>
