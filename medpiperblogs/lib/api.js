@@ -181,7 +181,7 @@ export async function getPostsByPage(
         return { ...post, postContentImage, userData };
       })
     );
-    console.log(totalPostData, "filterCompletePostsData");
+
     const filterCompletePostsData = getEssentialPostsInfo(completePostsData);
     return (
       { completePostsData: filterCompletePostsData, totalPostData } || {

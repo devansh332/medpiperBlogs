@@ -56,7 +56,7 @@ const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
       getMorePost();
     }
   };
-  console.log("totalPages", totalPages, newPageRef.current);
+  
   return (
     <>
       {posts &&
