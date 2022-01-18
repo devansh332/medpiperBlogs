@@ -12,13 +12,13 @@ import { getFilteredAllPosts } from "../lib/apis/postApis";
 // It have Intro to the blog listing
 // Index is SSR
 
-const Index = ({ allPosts, preview }) => {
+const Index = ({ allPosts }) => {
   const heroPost = allPosts.length > 0 && allPosts[0];
   const morePosts = allPosts.length > 1 ? allPosts.slice(1) : [];
 
   return (
     <>
-      <Layout preview={preview}>
+      <Layout>
         <Head>
           <title>Medpiper Blogs</title>
         </Head>
@@ -43,7 +43,7 @@ const Index = ({ allPosts, preview }) => {
 
 export default Index;
 
-export const getStaticProps = async ({ preview }) => {
+export const getStaticProps = async () => {
   const allPosts = await getFilteredAllPosts();
 
   return {

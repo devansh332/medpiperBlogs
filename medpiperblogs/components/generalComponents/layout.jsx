@@ -7,7 +7,7 @@ import Search from "./search";
 // It has a header, footer and main content.
 // It also has a search bar and meta tags.
 
-const Layout = ({ preview, children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Meta />

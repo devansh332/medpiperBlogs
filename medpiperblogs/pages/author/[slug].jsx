@@ -18,11 +18,9 @@ import { MORE_STORY_TITLE_BY_AUTHOR } from "../../lib/constants";
 
 // AuthorPage Page Documentation
 // AuthorPage Page is the page that shows the author's posts.
- // AuthorPage is ISR Page
- 
+// AuthorPage is ISR Page
 
-
-const AuthorPage = ({ userData, morePosts, preview }) => {
+const AuthorPage = ({ userData, morePosts }) => {
   const router = useRouter();
 
   if (!router.isFallback && !userData?.slug) {
@@ -31,7 +29,7 @@ const AuthorPage = ({ userData, morePosts, preview }) => {
   const infiniteScrollFilter = userData?.id ? { author: userData.id } : {};
 
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
         <Header />
         {router.isFallback ? (
@@ -76,11 +74,11 @@ export const getStaticPaths = async () => {
   });
   return {
     paths: path,
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
-export const getStaticProps = async ({ params, preview = false }) => {
+export const getStaticProps = async ({ params }) => {
   try {
     const { userData, morePosts } = await getAuthorDataWithSlugAndMorePosts(
       params.slug
@@ -88,12 +86,11 @@ export const getStaticProps = async ({ params, preview = false }) => {
 
     return {
       props: {
-        preview: preview,
         userData,
         morePosts,
       },
     };
   } catch (e) {
-    return { props: { preview: preview, userData: [] } };
+    return { props: { userData: [] } };
   }
 };

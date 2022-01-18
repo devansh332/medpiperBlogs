@@ -7,7 +7,7 @@ import Header from "../../components/generalComponents/header";
 import PostHeader from "../../components/blogComponents/post-header";
 import SectionSeparator from "../../components/generalComponents/section-separator";
 import Layout from "../../components/generalComponents/layout";
-import { getSlugsOfPosts, getPostAndMorePosts, getAllPostsSlugs } from "../../lib/apis/postApis";
+import { getPostAndMorePosts, getAllPostsSlugs } from "../../lib/apis/postApis";
 import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
 import Tags from "../../components/blogComponents/tags";
@@ -16,7 +16,7 @@ import Tags from "../../components/blogComponents/tags";
 // Post Page is the page that shows the post.
 // Post Page is ISR Page
 
-const Post = ({ post, morePosts, preview }) => {
+const Post = ({ post, morePosts }) => {
   const router = useRouter();
 
   if (!router.isFallback && !post?.slug) {
@@ -24,7 +24,7 @@ const Post = ({ post, morePosts, preview }) => {
   }
 
   return (
-    <Layout preview={preview}>
+    <Layout>
       <Container>
         <Header />
         {router.isFallback ? (
@@ -65,22 +65,21 @@ export const getStaticPaths = async () => {
   });
   return {
     paths: path,
-    fallback: true,
+    fallback: "blocking",
   };
 };
 
-export const getStaticProps = async ({ params, preview = false }) => {
+export const getStaticProps = async ({ params }) => {
   try {
     const { post, morePosts } = await getPostAndMorePosts(params.slug);
     return {
       props: {
-        preview: preview,
         post,
         morePosts: morePosts,
       },
       revalidate: 60,
     };
   } catch (e) {
-    return { props: { preview: preview, post: [], morePosts: [] } };
+    return { props: { post: [], morePosts: [] } };
   }
 };
