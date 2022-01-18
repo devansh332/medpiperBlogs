@@ -1,3 +1,6 @@
+// Tags Component Documentation
+// Tags Component render the tags of the blog.
+
 const Tags = ({ tags }) => {
   return (
     <>

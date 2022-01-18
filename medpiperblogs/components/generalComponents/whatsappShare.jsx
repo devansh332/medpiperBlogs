@@ -3,6 +3,10 @@ import React from "react";
 import Link from "next/link";
 import WhatsAppIcon from "../iconComponents/whatsAppIcons";
 
+// WhatsappShare Component Documentation
+// WhatsappShare Component render the share button on the blog.
+
+
 const WhatsappShare = () => {
   // share current url on whatsapp
   const getShareUrl = () => {

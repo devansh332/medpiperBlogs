@@ -1,5 +1,4 @@
 export const githubRepoUrl = "https://github.com/devansh332/medpiperBlogs";
-
 export const restApiBaseUrl = "https://journomed.com/wp-json/wp/v2";
 export const postSearchApiBaseUrl = `${restApiBaseUrl}/posts`;
 export const userSearchApiBaseUrl = `${restApiBaseUrl}/users`;

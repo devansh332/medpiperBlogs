@@ -2,6 +2,7 @@ import Footer from "./footer";
 import Meta from "./meta";
 import Search from "./search";
 
+// Layout Component Documentation
 // Layout component is used to wrap the entire page.
 // It has a header, footer and main content.
 // It also has a search bar and meta tags.

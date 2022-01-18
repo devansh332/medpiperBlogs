@@ -6,10 +6,11 @@ import HeroPost from "../components/blogComponents/hero-post";
 import MoreStories from "../components/blogComponents/more-stories";
 import { getFilteredAllPosts } from "../lib/apis/postApis";
 
-// Add Index Component Documentation
+// Index Page Documentation
 // Index is the main page of the blog.
 // It  have a hero post and a list of more posts.
 // It have Intro to the blog listing
+// Index is SSR
 
 const Index = ({ allPosts, preview }) => {
   const heroPost = allPosts.length > 0 && allPosts[0];

@@ -12,6 +12,10 @@ import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
 import Tags from "../../components/blogComponents/tags";
 
+// Post Page Documentation
+// Post Page is the page that shows the post.
+// Post Page is ISR Page
+
 const Post = ({ post, morePosts, preview }) => {
   const router = useRouter();
 

@@ -16,6 +16,12 @@ import Avatar from "../../components/authorComponents/avatar";
 import MoreStories from "../../components/blogComponents/more-stories";
 import { MORE_STORY_TITLE_BY_AUTHOR } from "../../lib/constants";
 
+// AuthorPage Page Documentation
+// AuthorPage Page is the page that shows the author's posts.
+ // AuthorPage is ISR Page
+ 
+
+
 const AuthorPage = ({ userData, morePosts, preview }) => {
   const router = useRouter();
 

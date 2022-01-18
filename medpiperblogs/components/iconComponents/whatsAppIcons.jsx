@@ -1,7 +1,10 @@
 import * as React from "react";
 
+// WhatsAppIcon Component Documentation
+// WhatsappIcon Component render the share button on the blog.
+
 const WhatsAppIcon = (props) => (
-    <svg
+  <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 40 40"
     width={30}

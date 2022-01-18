@@ -11,7 +11,15 @@ import { getAuthorDataByID } from "./authorApis";
 import { getContentImagePost } from "./mediaApis";
 import { getAllTags } from "./tagsApis";
 
+// All the functions related to post search
+// All function are async functions
+
 export async function getPostData(queryParams) {
+  // getPostData is a function that takes in a queryParams object
+  // and returns a promise that resolves to an object containing the apiData
+  // The apiData is an array of objects containing the data of the post that matches the queryParams
+  // The totalPostData is an object containing the total number of posts and the total number of pages
+
   try {
     const apiResponse = await axios.get(postSearchApiBaseUrl, {
       params: queryParams,
@@ -29,6 +37,9 @@ export async function getPostData(queryParams) {
 }
 
 export async function getSlugsOfPosts(limit = 10) {
+  // getSlugsOfPosts is a function that takes in a limit
+  // and returns a promise that resolves to an array of slugs
+
   const query = {
     per_page: limit,
     _fields: "slug",
@@ -45,6 +56,10 @@ export async function getSlugsOfPosts(limit = 10) {
 }
 
 export async function getPostBySlug(slug) {
+  // getPostBySlug is a function that takes in a slug
+  // and returns a promise that resolves to an object containing the apiData
+  // The apiData is an array of objects containing the data of the post that matches the slug
+
   const query = {
     slug: slug,
     _fields: getCompletePostTileFields(),
@@ -61,6 +76,10 @@ export async function getAllPosts(
   filters = {},
   fields = getPostTileFields()
 ) {
+  // getAllPosts is a function that takes in a limit and filters
+  // and returns a promise that resolves to an array of posts
+  // The posts are filtered by the filters object
+
   const query = {
     per_page: limit,
     _fields: fields,
@@ -82,6 +101,10 @@ export async function getAllPosts(
 }
 
 export async function getFilteredAllPosts(limit = 10) {
+  // getFilteredAllPosts is a function that takes in a limit
+  // and returns a promise that resolves to an array of posts
+  // The posts are filtered by the filters object
+  // getEssentialPostsInfo is a function that takes in a post and returns a object containing the essential post data
   const homePagePosts = await getAllPosts(limit);
 
   const filterHomePagePosts = getEssentialPostsInfo(homePagePosts);
@@ -95,6 +118,12 @@ export async function getPostsByPage(
   limit = 10,
   filters = {}
 ) {
+  // getPostsByPage is a function that takes in a page, offset and limit
+  // and returns a promise that resolves to an array of posts
+  // The posts are filtered by the filters object
+  // getEssentialPostsInfo is a function that takes in a post and returns a object containing the essential post data
+  // getContentImagePost is a function that takes in a featured_media and returns a promise that resolves to an string containing content Image
+  // getAuthorDataByID is a function that takes in a author and returns a promise that resolves to an object containing the author data
   try {
     const query = {
       per_page: limit,
@@ -125,6 +154,16 @@ export async function getPostsByPage(
 }
 
 export async function getPostAndMorePosts(slug) {
+  // getPostAndMorePosts is a function that takes in a slug
+  // and returns a promise that resolves to an object containing the post and more posts
+  // The post is an object containing the data of the post that matches the slug
+  // The morePosts is an array of objects containing the data of the more posts that matches the slug
+  // getEssentialPostsInfo is a function that takes in a post and returns a object containing the essential post data
+  // getContentImagePost is a function that takes in a featured_media and returns a promise that resolves to an string containing content Image
+  // getAuthorDataByID is a function that takes in a author and returns a promise that resolves to an object containing the author data
+  // getFilteredUserData is a function that takes in a userData and returns a object containing the essential user data
+  // getAllTags is a function that takes in a limit and filters
+  
   try {
     const post = await getPostBySlug(slug);
 
