@@ -22,7 +22,7 @@ const PostHeader = ({ title, coverImage, date, author, categories }) => {
       </div>
 
       <div className="mb-8 md:mb-16 sm:mx-0">
-        <CoverImage title={title} coverImage={coverImage} />
+        <CoverImage title={title} coverImage={coverImage} priority={true} />
       </div>
       <div className="flex flex-row-reverse max-w-2xl mx-auto">
         <div className="text-right mb-6 text-lg">
