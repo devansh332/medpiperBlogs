@@ -1,4 +1,7 @@
-import { CMS_NAME, CMS_URL } from "../../lib/constants";
+// Intro Component Documentation
+// Intro is the intro of the blog.
+// It have a title.
+
 
 const Intro = () => {
   return (

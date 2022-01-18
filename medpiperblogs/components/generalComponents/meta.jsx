@@ -1,5 +1,11 @@
 import Head from "next/head";
-import { CMS_NAME, HOME_OG_IMAGE_URL } from "../../lib/constants";
+
+// Meta Component Documentation
+// Meta is the head of the blog.
+// It have all the meta tags for SEO.
+// It also have the favicon.
+// It has the Og Image.
+// It is used in the Layout component.
 
 const Meta = () => {
   return (
@@ -31,9 +37,13 @@ const Meta = () => {
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
       <meta name="theme-color" content="#000" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta name="description" content={`Future of medi blog is here`} />
-      <meta property="og:image" content={HOME_OG_IMAGE_URL} />
+      <meta property="og:image" content="/medPiperBlogsOg.svg" />
     </Head>
   );
 };

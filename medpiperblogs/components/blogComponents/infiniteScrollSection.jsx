@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { getFilteredAllPosts, getPostsByPage } from "../../lib/api";
+import { getPostsByPage } from "../../lib/apis/postApis";
 import PostPreview from "./post-preview";
 import PostSkeleton from "./postSkeleton";
 
@@ -56,7 +56,7 @@ const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
       getMorePost();
     }
   };
-  
+
   return (
     <>
       {posts &&

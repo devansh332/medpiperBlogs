@@ -10,27 +10,28 @@ export const getCompletePostInfo = (post) => {
     userData,
   } = post;
   return {
-    title: title.rendered,
-    excerpt: excerpt.rendered,
-    content: content.rendered,
-    tags,
-    slug,
-    date,
-    postContentImage,
-    userData,
+    title: title?.rendered || "",
+    excerpt: excerpt?.rendered || "",
+    content: content?.rendered || "",
+    tags: tags ? tags : [],
+    slug: slug || "",
+    date: date || "",
+    postContentImage: postContentImage || "",
+    userData: userData || [],
   };
 };
 
 export const getEssentialPostInfo = (post) => {
   const { title, excerpt, slug, date, postContentImage, userData } = post;
-  const userDataFilter = getFilteredUserData(userData);
+
+  const filterUserData = userData ? getFilteredUserData(userData) : [];
   return {
-    title: title.rendered,
-    excerpt: excerpt.rendered,
-    slug,
-    date,
-    postContentImage,
-    userData: userDataFilter,
+    title: title?.rendered || "",
+    excerpt: excerpt?.rendered || "",
+    slug: slug || "",
+    date: date || "",
+    postContentImage: postContentImage || "",
+    userData: filterUserData || [],
   };
 };
 
@@ -51,13 +52,17 @@ export const getCompletePostTileFields = () => {
 };
 
 export const getFilteredUserData = (userData) => {
-  const { id, name, slug, avatar_urls } = userData;
-  return {
-    id,
-    name,
-    slug,
-    avatar_urls: avatar_urls["24"],
-  };
+  try {
+    const { id, name, slug, avatar_urls } = userData;
+    return {
+      id,
+      name,
+      slug,
+      avatar_urls: avatar_urls["24"],
+    };
+  } catch (e) {
+    return {};
+  }
 };
 
 export const getFilteredUsersData = (usersData) => {

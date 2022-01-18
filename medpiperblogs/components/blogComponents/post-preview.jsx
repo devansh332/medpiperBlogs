@@ -3,6 +3,7 @@ import Avatar from "../authorComponents/avatar";
 import Date from "../generalComponents/date";
 import CoverImage from "./cover-image";
 import NoImageAvailable from "./noImageAvailable";
+import ReactHtmlParser from "react-html-parser";
 
 const PostPreview = ({ title, coverImage, date, excerpt, author, slug }) => {
   return (
@@ -18,10 +19,7 @@ const PostPreview = ({ title, coverImage, date, excerpt, author, slug }) => {
       <h3 className="text-3xl mb-3 leading-snug">
         {slug ? (
           <Link href={`/posts/${slug}`}>
-            <a
-              className="hover:underline"
-              dangerouslySetInnerHTML={{ __html: title }}
-            ></a>
+            <a className="hover:underline">{ReactHtmlParser(title)}</a>
           </Link>
         ) : (
           { title }
@@ -30,10 +28,9 @@ const PostPreview = ({ title, coverImage, date, excerpt, author, slug }) => {
       <div className="text-lg mb-4">
         <Date dateString={date} />
       </div>
-      <div
-        className="text-lg leading-relaxed mb-4"
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      />
+      <div className="text-lg leading-relaxed mb-4">
+        {ReactHtmlParser(excerpt)}
+      </div>
       <Avatar author={author} />
     </div>
   );

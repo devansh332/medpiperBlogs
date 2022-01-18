@@ -5,9 +5,9 @@ import Header from "../../components/generalComponents/header";
 import Layout from "../../components/generalComponents/layout";
 import {
   getAllUserDataSlugs,
-  getAuthorDataWithSlug,
+  getAllUserData,
   getAuthorDataWithSlugAndMorePosts,
-} from "../../lib/api";
+} from "../../lib/apis/authorApis";
 import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
 
@@ -79,6 +79,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
     const { userData, morePosts } = await getAuthorDataWithSlugAndMorePosts(
       params.slug
     );
+
     return {
       props: {
         preview: preview,

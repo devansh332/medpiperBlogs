@@ -7,7 +7,7 @@ import Header from "../../components/generalComponents/header";
 import PostHeader from "../../components/blogComponents/post-header";
 import SectionSeparator from "../../components/generalComponents/section-separator";
 import Layout from "../../components/generalComponents/layout";
-import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
+import { getSlugsOfPosts, getPostAndMorePosts } from "../../lib/apis/postApis";
 import PostTitle from "../../components/blogComponents/post-title";
 import Head from "next/head";
 import Tags from "../../components/blogComponents/tags";
@@ -55,7 +55,7 @@ const Post = ({ post, morePosts, preview }) => {
 export default Post;
 
 export const getStaticPaths = async () => {
-  const allPosts = await getAllPostsWithSlug(100);
+  const allPosts = await getSlugsOfPosts(100);
   const path = allPosts.map((slug) => {
     return slug ? `/posts/${slug}` : "/";
   });

@@ -1,8 +1,15 @@
 import Container from "./container";
-// import Example path from lib/constants.js:
 import { githubRepoUrl } from "../../lib/constants";
 
+// Footer Component Documentation
+// Footer is the footer of the blog.
+// It have a link to the github repository.
+// It has Footer Slogan.
+// It is used in the Layout component.
+
+
 const Footer = () => {
+  
   return (
     <footer className="bg-accent-1 border-t border-accent-2">
       <Container>

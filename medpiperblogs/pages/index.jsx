@@ -4,11 +4,16 @@ import Intro from "../components/generalComponents/intro";
 import Layout from "../components/generalComponents/layout";
 import HeroPost from "../components/blogComponents/hero-post";
 import MoreStories from "../components/blogComponents/more-stories";
-import { getFilteredAllPosts } from "../lib/api";
+import { getFilteredAllPosts } from "../lib/apis/postApis";
+
+// Add Index Component Documentation
+// Index is the main page of the blog.
+// It  have a hero post and a list of more posts.
+// It have Intro to the blog listing
 
 const Index = ({ allPosts, preview }) => {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+  const heroPost = allPosts.length > 0 && allPosts[0];
+  const morePosts = allPosts.length > 1 ? allPosts.slice(1) : [];
 
   return (
     <>
