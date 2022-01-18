@@ -1,6 +1,10 @@
 import React from "react";
 import ContentLoader, { List } from "react-content-loader";
 
+// PostSkeleton Component Documentation
+// PostSkeleton Component is a component that is used to display the post skeleton.
+// It uses react-content-loader to display the skeleton.
+
 const PostSkeleton = () => {
   return (
     <ContentLoader viewBox="0 0 100 100">

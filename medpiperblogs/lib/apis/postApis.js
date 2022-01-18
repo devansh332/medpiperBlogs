@@ -8,6 +8,8 @@ import {
   getPostTileFields,
 } from "../util";
 import { getAuthorDataByID } from "./authorApis";
+import { getContentImagePost } from "./mediaApis";
+import { getAllTags } from "./tagsApis";
 
 export async function getPostData(queryParams) {
   try {
@@ -52,19 +54,6 @@ export async function getPostBySlug(slug) {
   const postData = postResponse[0];
 
   return postData;
-}
-
-async function getContentImagePost(featured_media) {
-  try {
-    const postContentImageResponse = await axios.get(
-      `${mediaSearchApiBaseUrl}/${featured_media}`
-    );
-    const postContentImageData = postContentImageResponse?.data;
-    const postContentImage = postContentImageData?.guid?.rendered;
-    return postContentImage || "";
-  } catch (e) {
-    return "";
-  }
 }
 
 export async function getAllPosts(
@@ -140,10 +129,9 @@ export async function getPostAndMorePosts(slug) {
     const post = await getPostBySlug(slug);
 
     post.postContentImage = await getContentImagePost(post.featured_media);
-
     const userDataResponse = await getAuthorDataByID(post.author);
-
     post.userData = getFilteredUserData(userDataResponse);
+    post.tags = await getAllTags(post.tags);
 
     const morePosts = await getAllPosts(2);
     const filterCompletePostsData = getEssentialPostsInfo(morePosts);

@@ -2,6 +2,10 @@ import PostPreview from "./post-preview";
 import InfiniteScrollSection from "./infiniteScrollSection";
 import { MORE_STORY_TITLE } from "../../lib/constants";
 
+// MoreStories Component Documentation
+// MoreStories is a generic component to display more posts.
+// It uses InfiniteScrollSection to load more posts when the user scrolls to the bottom of the page.
+
 const MoreStories = ({
   posts,
   moreStoryTitle = MORE_STORY_TITLE,

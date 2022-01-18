@@ -5,6 +5,12 @@ import CoverImage from "./cover-image";
 import NoImageAvailable from "./noImageAvailable";
 import ReactHtmlParser from "react-html-parser";
 
+// PostPreview Component Documentation
+// PostPreview Component is a component that is used to display the post preview on the home page.
+// It has a title, a cover image, a date, an excerpt and an author.
+// It uses ReactHtmlParser to parse provided html.
+// It Render Cover Image if it is available else it renders NoImageAvailable component.
+
 const PostPreview = ({ title, coverImage, date, excerpt, author, slug }) => {
   return (
     <div className=" border-2 p-4 mr-5 mb-5">

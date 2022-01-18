@@ -3,6 +3,13 @@ import { getPostsByPage } from "../../lib/apis/postApis";
 import PostPreview from "./post-preview";
 import PostSkeleton from "./postSkeleton";
 
+// InfiniteScrollSection Component Documentation
+// InfiniteScrollSection is a component that is used to load more posts
+// when the user scrolls to the bottom of the page.
+// It is used in the MoreStories component.
+// It Show PostSkeleton while loading more posts.
+// It uses IntersectionObserver to load more posts when the user scrolls to the bottom of the page.
+
 const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
   const [posts, setPosts] = useState(InitialPosts);
   const [loading, setLoading] = useState(false);
@@ -12,6 +19,9 @@ const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
   const [totalPages, setTotalPages] = useState(Infinity);
 
   useEffect(() => {
+    // Run when component is mounted
+    // Set the Observer to load more posts when the user scrolls to the bottom of the page.
+
     const options = {
       root: null,
       rootMargin: "20px",
@@ -22,6 +32,10 @@ const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
   }, []);
 
   const getMorePost = async () => {
+    // getMorePost fetches more posts from the server and appends them to the posts array.
+    // It also updates the totalPages state.
+    // It is called when the user scrolls to the bottom of the page.
+
     const nextPage = newPageRef.current + 1;
 
     setLoading(true);
@@ -51,6 +65,10 @@ const InfiniteScrollSection = ({ InitialPosts = [], filter = {} }) => {
     setLoading(false);
   };
   const handleObserver = (entities) => {
+    // handleObserver is called when the user scrolls to the bottom of the page.
+    // handleObserver checks if the user is near the bottom of the page.
+    // handleObserver calls getMorePost if the user is near the bottom of the page.
+    
     const target = entities[0];
     if (target?.isIntersecting) {
       getMorePost();

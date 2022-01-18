@@ -1,6 +1,12 @@
 import Image from "next/image";
-// import next link
 import Link from "next/link";
+
+// Avatar Component Documentation
+// Avatar Component is a component that is used to display the author's avatar.
+// It has an author.
+// It has an author's name.
+// It has an author's avatar.
+// It has an author's slug.
 
 const Avatar = ({
   author,
@@ -8,7 +14,7 @@ const Avatar = ({
   imgHeight = 12,
   isNameClickable = true,
 }) => {
-  const name = author?.name ? author.name : '';
+  const name = author?.name ? author.name : "";
   return (
     <div className="flex items-center">
       {author?.avatar_urls && (

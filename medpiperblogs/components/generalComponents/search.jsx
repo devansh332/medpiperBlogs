@@ -17,6 +17,7 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(false);
   const [results, setResults] = useState([]);
+  const timeout = useRef(null);
 
   const searchEndpoint = (query) =>
     // searchEndpoint returns a updated query url
@@ -26,20 +27,24 @@ const Search = () => {
     // onChangeHandler handles the change event
     // onChangeHandler sets the query state to the value of the input
     // onChangeHandler fetch the search endpoint with the updated query
+    // onChangeHandler is debounced to prevent multiple calls
 
+    clearTimeout(timeout.current);
     const query = event.target.value;
     setQuery(query);
     if (query.length) {
-      fetch(searchEndpoint(query))
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.length > 0) {
-            setResults([...res]);
-          }
-        });
+      timeout.current = setTimeout(() => {
+        fetch(searchEndpoint(query))
+          .then((res) => res.json())
+          .then((res) => {
+            if (res.length > 0) {
+              setResults([...res]);
+            }
+          });
+      }, 500);
     } else {
       // if the query is empty then set the results to empty array
-      
+
       setResults([]);
     }
   };

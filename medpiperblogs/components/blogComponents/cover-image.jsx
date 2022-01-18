@@ -3,6 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import NoImageAvailable from "./noImageAvailable";
 
+// CoverImage Documentation
+// CoverImage Component is a component that is used to display the cover image.
+// It has a title.
+// It has a cover image.
+// It has a slug.
+// It has a priority.
+// It has a link to the post.
+// It return NoImageAvailable if no image is available.
+
 const CoverImage = ({ title, coverImage, slug, priority = false }) => {
   const image = coverImage ? (
     <Image

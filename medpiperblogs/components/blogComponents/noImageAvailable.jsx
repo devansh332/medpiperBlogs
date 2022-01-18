@@ -2,7 +2,10 @@ import Image from "next/image";
 import React from "react";
 import cn from "classnames";
 
-function NoImageAvailable({ title, slug, priority = false }) {
+// NoImageAvailable Component is a component that is used to display the image.
+//
+
+const NoImageAvailable = ({ title, slug, priority = false }) => {
   return (
     <Image
       width={2000}
@@ -16,6 +19,6 @@ function NoImageAvailable({ title, slug, priority = false }) {
       })}
     />
   );
-}
+};
 
 export default NoImageAvailable;

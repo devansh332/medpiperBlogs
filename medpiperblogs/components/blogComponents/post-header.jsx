@@ -5,6 +5,12 @@ import PostTitle from "./post-title";
 
 import WhatsappShare from "../generalComponents/whatsappShare";
 
+// PostHeader Component Documentation
+// PostHeader Component is a component that is used to display the post header on the post page.
+// It has a title, a cover image, a date and an author.
+// It has a link to the post.
+// It uses ReactHtmlParser to parse provided html.
+
 const PostHeader = ({ title, coverImage, date, author, categories }) => {
   return (
     <>

@@ -8,11 +8,7 @@ import ReactHtmlParser from "react-html-parser";
 // HeroPost Component is a component that is used to display the hero post on the home page.
 // It has a title, a cover image, a date, an excerpt and an author.
 // It has a link to the post.
-// It has a cover image.
-// It has a title.
-// It has a date.
-// It has an excerpt.
-// It has an author.
+// It uses ReactHtmlParser to parse provided html.
 
 const HeroPost = ({ title, coverImage, date, excerpt, author, slug }) => {
   const PostTitle = title ? title : "";
