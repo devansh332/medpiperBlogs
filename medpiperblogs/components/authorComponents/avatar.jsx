@@ -8,7 +8,7 @@ const Avatar = ({
   imgHeight = 12,
   isNameClickable = true,
 }) => {
-  const name = author?.name ? author.name : "";
+  const name = author?.name ? author.name : '';
   return (
     <div className="flex items-center">
       {author?.avatar_urls && (
