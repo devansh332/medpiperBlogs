@@ -36,25 +36,6 @@ export async function getPostData(queryParams) {
   }
 }
 
-export async function getSlugsOfPosts(limit = 10) {
-  // getSlugsOfPosts is a function that takes in a limit
-  // and returns a promise that resolves to an array of slugs
-
-  const query = {
-    per_page: limit,
-    _fields: "slug",
-  };
-  const { apiData } = await getPostData(query);
-
-  const allSlugs = apiData
-    .map((post) => {
-      return post?.slug || "";
-    })
-    .filter((slug) => slug);
-
-  return allSlugs;
-}
-
 export async function getPostBySlug(slug) {
   // getPostBySlug is a function that takes in a slug
   // and returns a promise that resolves to an object containing the apiData
@@ -163,7 +144,7 @@ export async function getPostAndMorePosts(slug) {
   // getAuthorDataByID is a function that takes in a author and returns a promise that resolves to an object containing the author data
   // getFilteredUserData is a function that takes in a userData and returns a object containing the essential user data
   // getAllTags is a function that takes in a limit and filters
-  
+
   try {
     const post = await getPostBySlug(slug);
 
@@ -181,4 +162,32 @@ export async function getPostAndMorePosts(slug) {
   } catch (e) {
     return [];
   }
+}
+
+export async function getAllPostsSlugs() {
+  // getAllPostsSlugs is a function that returns a promise that resolves to an array of slugs
+
+  const query = {
+    per_page: 100,
+    _fields: "slug",
+  };
+  let apiDataArray = [];
+  const { apiData, totalPostData } = await getPostData(query);
+  apiDataArray = [...apiData];
+  for (let i = 1; i <= totalPostData.totalPages; i++) {
+    const query = {
+      per_page: 100,
+      page: i,
+      _fields: "slug",
+    };
+    const { apiData } = await getPostData(query);
+    apiDataArray = [...apiDataArray, ...apiData];
+  }
+  const allSlugs = apiDataArray
+    .map((post) => {
+      return post?.slug || "";
+    })
+    .filter((slug) => slug);
+
+  return allSlugs;
 }
