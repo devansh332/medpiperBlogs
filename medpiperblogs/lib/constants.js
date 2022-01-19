@@ -5,4 +5,4 @@ export const userSearchApiBaseUrl = `${restApiBaseUrl}/users`;
 export const mediaSearchApiBaseUrl = `${restApiBaseUrl}/media`;
 export const tagsSearchApiBaseUrl = `${restApiBaseUrl}/tags`;
 export const MORE_STORY_TITLE = "More Stories";
-export const MORE_STORY_TITLE_BY_AUTHOR = "More Stories by Author";
+export const MORE_STORY_TITLE_BY_AUTHOR = "Stories by Author";
